@@ -444,8 +444,8 @@ int main(int argc, char** argv )
     cv::waitKey(0);
     */
    cv::Mat final1, final2, final3;
-   myEdgeFilter(image, 2/3, final1, false);
-   myEdgeFilter(image, 2/3, final2);
+   myEdgeFilter(image, 1/3, final1, false);
+   myEdgeFilter(image, 1/3, final2);
    final2.copyTo(final3);
    final3.setTo(0, final2<10);
    
@@ -456,13 +456,13 @@ int main(int argc, char** argv )
    //final2.setTo(0, final2 < 3); // TODO:- Why is the threshold value so low?
    //std::cout << final1 << std::endl;
    int RHO_THRES = 15;
-   int THETA_THRES = 45;
-   int INTENSITY_THRES = 20;
+   int THETA_THRES = 15;
+   int INTENSITY_THRES = 10;
 
    myHoughTransform(final2, INTENSITY_THRES, RHO_THRES, THETA_THRES, res);
 
    std::vector<int> rhos, thetas;
-   int line_count = 10;
+   int line_count = 20;
    myHoughLines(res.H, line_count, rhos, thetas);
    
    for(int i=0; i<line_count; i++) {
